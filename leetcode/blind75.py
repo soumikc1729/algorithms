@@ -1,3 +1,19 @@
+# https://leetcode.com/problems/jump-game
+def can_jump(nums):
+    """
+    >>> can_jump([2,3,1,1,4])
+    True
+    >>> can_jump([3,2,1,0,4])
+    False
+    """
+    can_jump_upto = 0
+    for i, num in enumerate(nums):
+        if i > can_jump_upto:
+            return False
+        can_jump_upto = max(can_jump_upto, i + num)
+    return True
+
+
 # https://leetcode.com/problems/maximum-subarray
 def max_sub_array(nums):
     """
