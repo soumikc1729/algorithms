@@ -4,10 +4,11 @@ My personal repository to practice data structures, algorithms, and LeetCode pro
 
 # Running the Code
 
-Use Python 3 to run any script:
+Run scripts as modules from the project root to ensure imports work correctly:
 
 ```bash
-python path/to/file.py
+python -m path.to.module
+python -m leetcode.blind75 # example
 ```
 
 # Contributing
