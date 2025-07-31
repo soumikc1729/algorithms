@@ -2,7 +2,7 @@
 
 My personal repository to practice data structures, algorithms, and LeetCode problems in Python.
 
-# Running the Code
+## Running the Code
 
 Run scripts as modules from the project root to ensure imports work correctly:
 
@@ -11,6 +11,6 @@ python -m path.to.module
 python -m leetcode.blind75 # example
 ```
 
-# Contributing
+## Contributing
 
 This is a personal learning project. Suggestions are welcome.
