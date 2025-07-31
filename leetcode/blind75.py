@@ -1,11 +1,11 @@
 # https://leetcode.com/problems/contains-duplicate
 def contains_duplicate(nums):
     """
-    >>> contains_duplicate([1,2,3,1])
+    >>> contains_duplicate([1, 2, 3, 1])
     True
-    >>> contains_duplicate([1,2,3,4])
+    >>> contains_duplicate([1, 2, 3, 4])
     False
-    >>> contains_duplicate([1,1,1,3,3,4,3,2,4,2])
+    >>> contains_duplicate([1, 1, 1, 3, 3, 4, 3, 2, 4, 2])
     True
     """
     num_set = set()
@@ -19,9 +19,9 @@ def contains_duplicate(nums):
 # https://leetcode.com/problems/jump-game
 def can_jump(nums):
     """
-    >>> can_jump([2,3,1,1,4])
+    >>> can_jump([2, 3, 1, 1, 4])
     True
-    >>> can_jump([3,2,1,0,4])
+    >>> can_jump([3, 2, 1, 0, 4])
     False
     """
     can_jump_upto = 0
@@ -35,16 +35,16 @@ def can_jump(nums):
 # https://leetcode.com/problems/maximum-subarray
 def max_sub_array(nums):
     """
-    >>> max_sub_array([-2,1,-3,4,-1,2,1,-5,4])
+    >>> max_sub_array([-2, 1, -3, 4, -1, 2, 1, -5, 4])
     6
     >>> max_sub_array([1])
     1
-    >>> max_sub_array([5,4,-1,7,8])
+    >>> max_sub_array([5, 4, -1, 7, 8])
     23
     >>> max_sub_array([-1])
     -1
     """
-    MIN_POSSIBLE_NUM = -10**4 - 1
+    MIN_POSSIBLE_NUM = -(10**4) - 1
     max_sum_ending_here = max_sum_so_far = MIN_POSSIBLE_NUM
     for num in nums:
         max_sum_ending_here = max(max_sum_ending_here + num, num)
@@ -54,4 +54,5 @@ def max_sub_array(nums):
 
 if __name__ == "__main__":
     import doctest
+
     doctest.testmod()
