@@ -68,6 +68,7 @@ class TreeNode:
         return arr[: i + 1]
 
 
+# https://leetcode.com/problems/invert-binary-tree
 def invert_tree(root):
     """
     >>> TreeNode.serialize(invert_tree(TreeNode.deserialize([4, 2, 7, 1, 3, 6, 9])))
