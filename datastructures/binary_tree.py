@@ -12,59 +12,57 @@ class BinaryTreeNode:
         return BinaryTreeNode(val) if val else None
 
 
-class BinaryTree:
-    @staticmethod
-    def deserialize(vals):
-        if not vals:
-            return []
+def deserialize_binary_tree(vals):
+    if not vals:
+        return []
 
-        root = BinaryTreeNode.create(vals[0])
+    root = BinaryTreeNode.create(vals[0])
 
-        q = deque()
-        q.append(root)
+    q = deque()
+    q.append(root)
 
-        i = 0
-        while True:
-            node = q.popleft()
-            i += 1
-            if i == len(vals):
-                break
-            node.left = BinaryTreeNode.create(vals[i])
-            if node.left:
-                q.append(node.left)
-            i += 1
-            if i == len(vals):
-                break
-            node.right = BinaryTreeNode.create(vals[i])
-            if node.right:
-                q.append(node.right)
+    i = 0
+    while True:
+        node = q.popleft()
+        i += 1
+        if i == len(vals):
+            break
+        node.left = BinaryTreeNode.create(vals[i])
+        if node.left:
+            q.append(node.left)
+        i += 1
+        if i == len(vals):
+            break
+        node.right = BinaryTreeNode.create(vals[i])
+        if node.right:
+            q.append(node.right)
 
-        return root
+    return root
 
-    @staticmethod
-    def serialize(root):
-        if not root:
-            return []
 
-        q = deque()
-        q.append(root)
+def serialize_binary_tree(root):
+    if not root:
+        return []
 
-        arr = [root.val]
+    q = deque()
+    q.append(root)
 
-        def append(node):
-            if node:
-                q.append(node)
-                arr.append(node.val)
-            else:
-                arr.append(None)
+    arr = [root.val]
 
-        while q:
-            node = q.popleft()
-            append(node.left)
-            append(node.right)
+    def append(node):
+        if node:
+            q.append(node)
+            arr.append(node.val)
+        else:
+            arr.append(None)
 
-        i = len(arr) - 1
-        while i >= 0 and not arr[i]:
-            i -= 1
+    while q:
+        node = q.popleft()
+        append(node.left)
+        append(node.right)
 
-        return arr[: i + 1]
+    i = len(arr) - 1
+    while i >= 0 and not arr[i]:
+        i -= 1
+
+    return arr[: i + 1]

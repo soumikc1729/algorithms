@@ -1,12 +1,12 @@
 # https://leetcode.com/problems/invert-binary-tree
 def invert_tree(root):
     """
-    >>> from datastructures.binary_tree import BinaryTree
-    >>> BinaryTree.serialize(invert_tree(BinaryTree.deserialize([4, 2, 7, 1, 3, 6, 9])))
+    >>> from datastructures.binary_tree import deserialize_binary_tree, serialize_binary_tree
+    >>> serialize_binary_tree(invert_tree(deserialize_binary_tree([4, 2, 7, 1, 3, 6, 9])))
     [4, 7, 2, 9, 6, 3, 1]
-    >>> BinaryTree.serialize(invert_tree(BinaryTree.deserialize([2, 1, 3])))
+    >>> serialize_binary_tree(invert_tree(deserialize_binary_tree([2, 1, 3])))
     [2, 3, 1]
-    >>> BinaryTree.serialize(invert_tree(BinaryTree.deserialize([])))
+    >>> serialize_binary_tree(invert_tree(deserialize_binary_tree([])))
     []
     """
     if not root:
