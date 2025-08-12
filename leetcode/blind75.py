@@ -1,3 +1,19 @@
+# https://leetcode.com/problems/valid-anagram
+def is_anagram(first, second):
+    """
+    >>> is_anagram("anagram", "nagaram")
+    True
+    >>> is_anagram("rat", "car")
+    False
+    """
+    freq = [0] * 26
+    for c in first:
+        freq[ord(c) - ord("a")] += 1
+    for c in second:
+        freq[ord(c) - ord("a")] -= 1
+    return all(f == 0 for f in freq)
+
+
 # https://leetcode.com/problems/invert-binary-tree
 def invert_tree(root):
     """
