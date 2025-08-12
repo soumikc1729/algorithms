@@ -1,3 +1,28 @@
+# https://leetcode.com/problems/palindromic-substrings
+def count_substrings(string):
+    """
+    >>> count_substrings("abc")
+    3
+    >>> count_substrings("aaa")
+    6
+    """
+    total_palindromes = 0
+
+    def expand_from_center(left, right):
+        palindromes_found = 0
+        while left >= 0 and right < len(string) and string[left] == string[right]:
+            left -= 1
+            right += 1
+            palindromes_found += 1
+        return palindromes_found
+
+    for i in range(len(string)):
+        total_palindromes += expand_from_center(i, i)
+        total_palindromes += expand_from_center(i, i + 1)
+
+    return total_palindromes
+
+
 # https://leetcode.com/problems/valid-anagram
 def is_anagram(first, second):
     """
