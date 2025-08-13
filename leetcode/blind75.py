@@ -1,3 +1,25 @@
+# https://leetcode.com/problems/same-tree
+def is_same_tree(first, second):
+    """
+    >>> from datastructures.binary_tree import deserialize_binary_tree
+    >>> is_same_tree(deserialize_binary_tree([1, 2, 3]), deserialize_binary_tree([1, 2, 3]))
+    True
+    >>> is_same_tree(deserialize_binary_tree([1, 2]), deserialize_binary_tree([1, None, 2]))
+    False
+    >>> is_same_tree(deserialize_binary_tree([1, 2, 1]), deserialize_binary_tree([1, 1, 2]))
+    False
+    """
+    if not first and not second:
+        return True
+
+    if first and second and first.val == second.val:
+        left_subtree_same = is_same_tree(first.left, second.left)
+        right_subtree_same = is_same_tree(first.right, second.right)
+        return left_subtree_same and right_subtree_same
+
+    return False
+
+
 # https://leetcode.com/problems/two-sum
 def two_sum(nums, target):
     """
