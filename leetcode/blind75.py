@@ -1,3 +1,24 @@
+# https://leetcode.com/problems/house-robber
+def rob(stashes):
+    """
+    >>> rob([1, 2, 3, 1])
+    4
+    >>> rob([2, 7, 9, 3, 1])
+    12
+    """
+    if len(stashes) == 1:
+        return stashes[0]
+
+    dp = [0] * len(stashes)
+    dp[0] = stashes[0]
+    dp[1] = max(stashes[0], stashes[1])
+
+    for i in range(2, len(stashes)):
+        dp[i] = max(dp[i - 1], dp[i - 2] + stashes[i])
+
+    return dp[-1]
+
+
 # https://leetcode.com/problems/same-tree
 def is_same_tree(first, second):
     """
