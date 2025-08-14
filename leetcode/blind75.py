@@ -1,3 +1,28 @@
+# https://leetcode.com/problems/coin-change
+def coin_change(coins, amount):
+    """
+    >>> coin_change([1, 2, 5], 11)
+    3
+    >>> coin_change([2], 3)
+    -1
+    >>> coin_change([1], 0)
+    0
+    >>> coin_change([186, 419, 83, 408], 6249)
+    20
+    """
+    dp = [-1] * (amount + 1)
+    dp[0] = 0
+    for amt in range(1, amount + 1):
+        for coin in coins:
+            if amt >= coin and dp[amt - coin] != -1:
+                dp[amt] = (
+                    dp[amt - coin] + 1
+                    if dp[amt] == -1
+                    else min(dp[amt], dp[amt - coin] + 1)
+                )
+    return dp[amount]
+
+
 # https://leetcode.com/problems/house-robber
 def rob(stashes):
     """
