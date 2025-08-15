@@ -1,3 +1,37 @@
+# https://leetcode.com/problems/binary-tree-level-order-traversal
+def level_order(root):
+    """
+    >>> from datastructures.binary_tree import deserialize_binary_tree
+    >>> level_order(deserialize_binary_tree([3, 9, 20, None, None, 15, 7]))
+    [[3], [9, 20], [15, 7]]
+    >>> level_order(deserialize_binary_tree([1]))
+    [[1]]
+    >>> level_order(deserialize_binary_tree([]))
+    []
+    """
+    from collections import deque
+
+    if not root:
+        return []
+
+    level_order_traversal = []
+    current_level = deque()
+    current_level.append(root)
+
+    while current_level:
+        level_order_traversal.append([node.val for node in current_level])
+        next_level = deque()
+        while current_level:
+            node = current_level.popleft()
+            if node.left:
+                next_level.append(node.left)
+            if node.right:
+                next_level.append(node.right)
+        current_level = next_level
+
+    return level_order_traversal
+
+
 # https://leetcode.com/problems/coin-change
 def coin_change(coins, amount):
     """
