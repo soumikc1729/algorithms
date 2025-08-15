@@ -1,3 +1,46 @@
+# https://leetcode.com/problems/3sum
+def three_sum(nums):
+    """
+    >>> three_sum([-1, 0, 1, 2, -1, -4])
+    [[-1, -1, 2], [-1, 0, 1]]
+    >>> three_sum([0, 1, 1])
+    []
+    >>> three_sum([0, 0, 0])
+    [[0, 0, 0]]
+    """
+    nums.sort()
+
+    def two_sum(target, left):
+        ans2 = []
+        right = len(nums) - 1
+        while left < right:
+            sum = nums[left] + nums[right]
+            if sum < target:
+                left += 1
+            elif sum > target:
+                right -= 1
+            else:
+                ans2.append([nums[left], nums[right]])
+                while left < right and nums[left] == nums[left + 1]:
+                    left += 1
+                left += 1
+                while left < right and nums[right] == nums[right - 1]:
+                    right -= 1
+                right -= 1
+
+        return ans2
+
+    ans3 = []
+    for i in range(len(nums) - 2):
+        if i > 0 and nums[i] == nums[i - 1]:
+            continue
+        ans2 = two_sum(-nums[i], i + 1)
+        if ans2:
+            ans3 += [[nums[i]] + a2 for a2 in ans2]
+
+    return ans3
+
+
 # https://leetcode.com/problems/binary-tree-level-order-traversal
 def level_order(root):
     """
