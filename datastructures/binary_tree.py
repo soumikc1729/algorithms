@@ -14,7 +14,7 @@ class BinaryTreeNode:
 
 def deserialize_binary_tree(vals):
     if not vals:
-        return []
+        return None
 
     root = BinaryTreeNode.create(vals[0])
 
