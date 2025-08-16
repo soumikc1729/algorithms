@@ -1,3 +1,30 @@
+# https://leetcode.com/problems/remove-nth-node-from-end-of-list
+def remove_nth_from_end(head, n):
+    """
+    >>> from datastructures.linked_list import deserialize_linked_list, serialize_linked_list
+    >>> serialize_linked_list(remove_nth_from_end(deserialize_linked_list([1, 2, 3, 4, 5]), 2))
+    [1, 2, 3, 5]
+    >>> serialize_linked_list(remove_nth_from_end(deserialize_linked_list([1]), 1))
+    []
+    >>> serialize_linked_list(remove_nth_from_end(deserialize_linked_list([1, 2]), 1))
+    [1]
+    """
+
+    def remove_nth_from_end_util(ptr):
+        if not ptr:
+            return (None, 0)
+
+        next, next_len = remove_nth_from_end_util(ptr.next)
+        curr_len = next_len + 1
+        if curr_len == n:
+            return (next, curr_len)
+        else:
+            ptr.next = next
+            return (ptr, curr_len)
+
+    return remove_nth_from_end_util(head)[0]
+
+
 # https://leetcode.com/problems/3sum
 def three_sum(nums):
     """
