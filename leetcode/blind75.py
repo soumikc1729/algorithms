@@ -1,3 +1,31 @@
+# https://leetcode.com/problems/non-overlapping-intervals
+def erase_overlap_intervals(intervals):
+    """
+    >>> erase_overlap_intervals([[1, 2], [2, 3], [3, 4], [1, 3]])
+    1
+    >>> erase_overlap_intervals([[1, 2], [1, 2], [1, 2]])
+    2
+    >>> erase_overlap_intervals([[1, 2], [2, 3]])
+    0
+    """
+    intervals.sort()
+
+    intervals_to_be_removed = 0
+
+    curr_end = intervals[0][1]
+    for i in range(1, len(intervals)):
+        [start, end] = intervals[i]
+
+        if start < curr_end:
+            intervals_to_be_removed += 1
+            if end < curr_end:
+                curr_end = end
+        else:
+            curr_end = end
+
+    return intervals_to_be_removed
+
+
 # https://leetcode.com/problems/product-of-array-except-self
 def product_except_self(nums):
     """
