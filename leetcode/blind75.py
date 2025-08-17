@@ -1,3 +1,30 @@
+# https://leetcode.com/problems/house-robber-ii
+def rob2(stashes):
+    """
+    >>> rob2([2, 3, 2])
+    3
+    >>> rob2([1, 2, 3, 1])
+    4
+    >>> rob2([1, 2, 3])
+    3
+    """
+    if len(stashes) == 1:
+        return stashes[0]
+
+    dp_with_0 = [0] * len(stashes)
+    dp_with_0[0] = stashes[0]
+    dp_with_0[1] = max(dp_with_0[0], stashes[1])
+
+    dp_without_0 = [0] * len(stashes)
+    dp_without_0[1] = stashes[1]
+
+    for i in range(2, len(stashes)):
+        dp_with_0[i] = max(dp_with_0[i - 1], dp_with_0[i - 2] + stashes[i])
+        dp_without_0[i] = max(dp_without_0[i - 1], dp_without_0[i - 2] + stashes[i])
+
+    return max(dp_with_0[-2], dp_without_0[-1])
+
+
 # https://leetcode.com/problems/number-of-islands
 def num_islands(grid):
     """
