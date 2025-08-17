@@ -1,3 +1,38 @@
+# https://leetcode.com/problems/number-of-islands
+def num_islands(grid):
+    """
+    >>> num_islands([["1", "1", "1", "1", "0"], ["1", "1", "0", "1", "0"], ["1", "1", "0", "0", "0"], ["0", "0", "0", "0", "0"]])
+    1
+    >>> num_islands([["1", "1", "0", "0", "0"], ["1", "1", "0", "0", "0"], ["0", "0", "1", "0", "0"], ["0", "0", "0", "1", "1"]])
+    3
+    >>> num_islands([["0"]])
+    0
+    """
+    from datastructures.union_find import UnionFind
+
+    rows, cols = len(grid), len(grid[0])
+
+    location_ones = []
+    for r in range(rows):
+        for c in range(cols):
+            if grid[r][c] == "1":
+                location_ones.append((r, c))
+
+    if not location_ones:
+        return 0
+
+    uf = UnionFind(location_ones)
+    for r in range(rows):
+        for c in range(cols):
+            if grid[r][c] == "1":
+                if r > 0 and grid[r - 1][c] == "1":
+                    uf.union((r, c), (r - 1, c))
+                if c > 0 and grid[r][c - 1] == "1":
+                    uf.union((r, c), (r, c - 1))
+
+    return uf.num_components
+
+
 # https://leetcode.com/problems/remove-nth-node-from-end-of-list
 def remove_nth_from_end(head, n):
     """
