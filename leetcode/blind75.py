@@ -1,3 +1,50 @@
+# https://leetcode.com/problems/pacific-atlantic-water-flow
+def pacific_atlantic(heights):
+    """
+    >>> pacific_atlantic([[1, 2, 2, 3, 5], [3, 2, 3, 4, 4], [2, 4, 5, 3, 1], [6, 7, 1, 4, 5], [5, 1, 1, 2, 4]])
+    [[4, 0], [0, 4], [3, 1], [1, 4], [3, 0], [2, 2], [1, 3]]
+    >>> pacific_atlantic([[1]])
+    [[0, 0]]
+    """
+    rows, cols = len(heights), len(heights[0])
+
+    def height(node):
+        (r, c) = node
+        return heights[r][c]
+
+    def neighbors(node):
+        (r, c) = node
+        if r > 0:
+            yield (r - 1, c)
+        if r < rows - 1:
+            yield (r + 1, c)
+        if c > 0:
+            yield (r, c - 1)
+        if c < cols - 1:
+            yield (r, c + 1)
+
+    def walk_coast(coast):
+        from datastructures.graph import bfs
+
+        visited = set()
+        for node in coast:
+            if node not in visited:
+                can_access = lambda node, neighbor: height(node) <= height(neighbor)
+                bfs(node, visited, neighbors, can_access)
+
+        return visited
+
+    pacific_coast = [(r, 0) for r in range(rows)] + [(0, c) for c in range(cols)]
+    pacific_access = walk_coast(pacific_coast)
+
+    atlantic_coast = [(r, cols - 1) for r in range(rows)] + [
+        (rows - 1, c) for c in range(cols)
+    ]
+    atlantic_access = walk_coast(atlantic_coast)
+
+    return [list(node) for node in (pacific_access & atlantic_access)]
+
+
 # https://leetcode.com/problems/graph-valid-tree
 def valid_tree(n, edges):
     """

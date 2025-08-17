@@ -21,3 +21,20 @@ class UndirecterdGraph:
                 return True
 
         return False
+
+
+def bfs(src, visited, neighbors, can_access):
+    from collections import deque
+
+    q = deque()
+
+    q.append(src)
+    visited.add(src)
+
+    while q:
+        node = q.popleft()
+
+        for neighbor in neighbors(node):
+            if neighbor not in visited and can_access(node, neighbor):
+                q.append(neighbor)
+                visited.add(neighbor)
