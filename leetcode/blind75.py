@@ -1,3 +1,25 @@
+# https://leetcode.com/problems/product-of-array-except-self
+def product_except_self(nums):
+    """
+    >>> product_except_self([1, 2, 3, 4])
+    [24, 12, 8, 6]
+    >>> product_except_self([-1, 1, 0, -3, 3])
+    [0, 0, 9, 0, 0]
+    """
+    prefix_products = [1] * len(nums)
+    for i in range(1, len(nums)):
+        prefix_products[i] = prefix_products[i - 1] * nums[i - 1]
+
+    suffix_products = [1] * len(nums)
+    for i in range(len(nums) - 2, -1, -1):
+        suffix_products[i] = suffix_products[i + 1] * nums[i + 1]
+
+    return [
+        prefix_product * suffix_product
+        for prefix_product, suffix_product in zip(prefix_products, suffix_products)
+    ]
+
+
 # https://leetcode.com/problems/pacific-atlantic-water-flow
 def pacific_atlantic(heights):
     """
