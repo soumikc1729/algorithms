@@ -1,3 +1,20 @@
+# https://leetcode.com/problems/graph-valid-tree
+def valid_tree(n, edges):
+    """
+    >>> valid_tree(5, [[0, 1], [0, 2], [0, 3], [1, 4]])
+    True
+    >>> valid_tree(5, [[0, 1], [1, 2], [2, 3], [1, 3], [1, 4]])
+    False
+    """
+    from datastructures.graph import UndirecterdGraph
+
+    g = UndirecterdGraph(n, edges)
+    visited = set()
+    has_cycle = g.dfs(0, visited, -1)
+    connected = len(visited) == n
+    return connected and not has_cycle
+
+
 # https://leetcode.com/problems/house-robber-ii
 def rob2(stashes):
     """

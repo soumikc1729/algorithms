@@ -1,0 +1,23 @@
+class UndirecterdGraph:
+    def __init__(self, n, edges):
+        if n <= 0:
+            raise Exception("n cannot be <= 0")
+        self.adj = [[] for _ in range(n)]
+        for edge in edges:
+            self.add_edge(*edge)
+
+    def add_edge(self, n1, n2):
+        self.adj[n1].append(n2)
+        self.adj[n2].append(n1)
+
+    def dfs(self, node, visited, parent):
+        visited.add(node)
+
+        for neighbor in self.adj[node]:
+            if neighbor not in visited:
+                if self.dfs(neighbor, visited, node):
+                    return True
+            elif neighbor != parent:
+                return True
+
+        return False
