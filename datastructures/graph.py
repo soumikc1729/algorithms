@@ -1,3 +1,6 @@
+from collections import deque
+
+
 class UndirecterdGraph:
     def __init__(self, n, edges):
         if n <= 0:
@@ -24,8 +27,6 @@ class UndirecterdGraph:
 
 
 def bfs(src, visited, neighbors, can_access):
-    from collections import deque
-
     q = deque()
 
     q.append(src)
