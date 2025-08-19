@@ -74,7 +74,7 @@ def pacific_atlantic(heights):
             yield (r, c + 1)
 
     def walk_coast(coast):
-        from datastructures.graph import bfs
+        from data_structures.graph import bfs
 
         visited = set()
         for node in coast:
@@ -103,7 +103,7 @@ def valid_tree(n, edges):
     >>> valid_tree(5, [[0, 1], [1, 2], [2, 3], [1, 3], [1, 4]])
     False
     """
-    from datastructures.graph import UndirecterdGraph
+    from data_structures.graph import UndirecterdGraph
 
     g = UndirecterdGraph(n, edges)
     visited = set()
@@ -149,7 +149,7 @@ def num_islands(grid):
     >>> num_islands([["0"]])
     0
     """
-    from datastructures.union_find import UnionFind
+    from data_structures.union_find import UnionFind
 
     rows, cols = len(grid), len(grid[0])
 
@@ -177,7 +177,7 @@ def num_islands(grid):
 # https://leetcode.com/problems/remove-nth-node-from-end-of-list
 def remove_nth_from_end(head, n):
     """
-    >>> from datastructures.linked_list import deserialize_linked_list, serialize_linked_list
+    >>> from data_structures.linked_list import deserialize_linked_list, serialize_linked_list
     >>> serialize_linked_list(remove_nth_from_end(deserialize_linked_list([1, 2, 3, 4, 5]), 2))
     [1, 2, 3, 5]
     >>> serialize_linked_list(remove_nth_from_end(deserialize_linked_list([1]), 1))
@@ -247,7 +247,7 @@ def three_sum(nums):
 # https://leetcode.com/problems/binary-tree-level-order-traversal
 def level_order(root):
     """
-    >>> from datastructures.binary_tree import deserialize_binary_tree
+    >>> from data_structures.binary_tree import deserialize_binary_tree
     >>> level_order(deserialize_binary_tree([3, 9, 20, None, None, 15, 7]))
     [[3], [9, 20], [15, 7]]
     >>> level_order(deserialize_binary_tree([1]))
@@ -327,7 +327,7 @@ def rob(stashes):
 # https://leetcode.com/problems/same-tree
 def is_same_tree(first, second):
     """
-    >>> from datastructures.binary_tree import deserialize_binary_tree
+    >>> from data_structures.binary_tree import deserialize_binary_tree
     >>> is_same_tree(deserialize_binary_tree([1, 2, 3]), deserialize_binary_tree([1, 2, 3]))
     True
     >>> is_same_tree(deserialize_binary_tree([1, 2]), deserialize_binary_tree([1, None, 2]))
@@ -440,7 +440,7 @@ def is_anagram(first, second):
 # https://leetcode.com/problems/invert-binary-tree
 def invert_tree(root):
     """
-    >>> from datastructures.binary_tree import deserialize_binary_tree, serialize_binary_tree
+    >>> from data_structures.binary_tree import deserialize_binary_tree, serialize_binary_tree
     >>> serialize_binary_tree(invert_tree(deserialize_binary_tree([4, 2, 7, 1, 3, 6, 9])))
     [4, 7, 2, 9, 6, 3, 1]
     >>> serialize_binary_tree(invert_tree(deserialize_binary_tree([2, 1, 3])))
