@@ -1,3 +1,34 @@
+# https://leetcode.com/problems/valid-parentheses
+def is_valid(string):
+    """
+    >>> is_valid("()")
+    True
+    >>> is_valid("()[]{}")
+    True
+    >>> is_valid("(]")
+    False
+    >>> is_valid("([])")
+    True
+    >>> is_valid("([)]")
+    False
+    """
+    from collections import deque
+
+    bracket_map = {"(": ")", "{": "}", "[": "]"}
+
+    stack = deque()
+
+    for ch in string:
+        if ch in bracket_map:
+            stack.append(ch)
+        elif stack and bracket_map[stack[-1]] == ch:
+            stack.pop()
+        else:
+            return False
+
+    return len(stack) == 0
+
+
 # https://leetcode.com/problems/missing-number
 def missing_number(nums):
     """
