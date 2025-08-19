@@ -1,3 +1,19 @@
+# https://leetcode.com/problems/missing-number
+def missing_number(nums):
+    """
+    >>> missing_number([3, 0, 1])
+    2
+    >>> missing_number([0, 1])
+    2
+    >>> missing_number([9, 6, 4, 2, 3, 5, 7, 0, 1])
+    8
+    """
+    n = len(nums)
+    expected_sum = n * (n + 1) // 2
+    actual_sum = sum(nums)
+    return expected_sum - actual_sum
+
+
 # https://leetcode.com/problems/non-overlapping-intervals
 def erase_overlap_intervals(intervals):
     """
