@@ -1,3 +1,22 @@
+# https://leetcode.com/problems/valid-palindrome
+def is_palindrome(string):
+    """
+    >>> is_palindrome("A man, a plan, a canal: Panama")
+    True
+    >>> is_palindrome("race a car")
+    False
+    >>> is_palindrome(" ")
+    True
+    """
+    chars = list(filter(lambda char: char.isalnum(), string.lower()))
+    n = len(chars)
+    for i in range(n // 2):
+        if chars[i] != chars[n - 1 - i]:
+            return False
+
+    return True
+
+
 # https://leetcode.com/problems/course-schedule
 def can_finish(num_courses, prerequisites):
     """
