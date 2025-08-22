@@ -1,3 +1,23 @@
+# https://leetcode.com/problems/course-schedule
+def can_finish(num_courses, prerequisites):
+    """
+    >>> can_finish(2, [[1, 0]])
+    True
+    >>> can_finish(2, [[1, 0], [0, 1]])
+    False
+    """
+    from data_structures.graph import DirectedGraph
+
+    g = DirectedGraph(num_courses, prerequisites)
+
+    visited = set()
+    for node in range(num_courses):
+        if node not in visited and g.dfs(node, visited, stack=set()):
+            return False
+
+    return True
+
+
 # https://leetcode.com/problems/valid-parentheses
 def is_valid(string):
     """

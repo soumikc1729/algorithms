@@ -24,6 +24,30 @@ class UndirecterdGraph:
         return False
 
 
+class DirectedGraph:
+    def __init__(self, n, edges):
+        self.adj = [[] for _ in range(n)]
+        for edge in edges:
+            self.add_edge(*edge)
+
+    def add_edge(self, src, dst):
+        self.adj[src].append(dst)
+
+    def dfs(self, node, visited, stack):
+        visited.add(node)
+        stack.add(node)
+
+        for neighbor in self.adj[node]:
+            if neighbor in stack:
+                return True
+            if neighbor not in visited and self.dfs(neighbor, visited, stack):
+                return True
+
+        stack.remove(node)
+
+        return False
+
+
 def bfs(src, visited, neighbors, can_access):
     q = deque()
 
