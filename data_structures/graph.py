@@ -3,8 +3,6 @@ from collections import deque
 
 class UndirecterdGraph:
     def __init__(self, n, edges):
-        if n <= 0:
-            raise Exception("n cannot be <= 0")
         self.adj = [[] for _ in range(n)]
         for edge in edges:
             self.add_edge(*edge)
