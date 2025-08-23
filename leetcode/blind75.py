@@ -1,3 +1,34 @@
+# https://leetcode.com/problems/meeting-rooms-ii
+def min_meeting_rooms(intervals):
+    """
+    >>> min_meeting_rooms([[0, 30], [5, 10], [15, 20]])
+    2
+    >>> min_meeting_rooms([[7, 10], [2, 4]])
+    1
+    >>> min_meeting_rooms([[5, 8], [6, 8]])
+    2
+    """
+
+    import heapq
+
+    pq = []
+    curr_overlap = max_overlap = 0
+
+    intervals.sort()
+
+    for interval in intervals:
+        while pq and pq[0][1] <= interval[0]:
+            heapq.heappop(pq)
+            curr_overlap -= 1
+
+        heapq.heappush(pq, (interval[1], interval[1]))
+        curr_overlap += 1
+
+        max_overlap = max(max_overlap, curr_overlap)
+
+    return max_overlap
+
+
 # https://leetcode.com/problems/insert-interval
 def insert(intervals, new_interval):
     """
