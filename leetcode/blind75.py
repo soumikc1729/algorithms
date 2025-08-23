@@ -1,3 +1,25 @@
+# https://leetcode.com/problems/reverse-linked-list
+def reverse_list(head):
+    """
+    >>> from data_structures.linked_list import deserialize_linked_list, serialize_linked_list
+    >>> serialize_linked_list(reverse_list(deserialize_linked_list([1, 2, 3, 4, 5])))
+    [5, 4, 3, 2, 1]
+    >>> serialize_linked_list(reverse_list(deserialize_linked_list([1, 2])))
+    [2, 1]
+    >>> serialize_linked_list(reverse_list(deserialize_linked_list([])))
+    []
+    """
+    prev, curr = None, head
+
+    while curr:
+        tmp = curr.next
+        curr.next = prev
+        prev = curr
+        curr = tmp
+
+    return prev
+
+
 # https://leetcode.com/problems/meeting-rooms-ii
 def min_meeting_rooms(intervals):
     """
