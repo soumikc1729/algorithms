@@ -1,3 +1,28 @@
+# https://leetcode.com/problems/merge-intervals
+def merge(intervals):
+    """
+    >>> merge([[1, 3], [2, 6], [8, 10], [15, 18]])
+    [[1, 6], [8, 10], [15, 18]]
+    >>> merge([[1, 4], [4, 5]])
+    [[1, 5]]
+    >>> merge([[1, 4], [2, 3]])
+    [[1, 4]]
+    """
+    intervals.sort()
+    curr = intervals[0]
+    merged = []
+    for i in range(1, len(intervals)):
+        curr_start, curr_end = curr
+        new_start, new_end = intervals[i]
+        if curr_end >= new_start:
+            curr = [curr_start, max(curr_end, new_end)]
+        else:
+            merged.append(curr)
+            curr = [new_start, new_end]
+    merged.append(curr)
+    return merged
+
+
 # https://leetcode.com/problems/maximum-product-subarray
 def max_product(nums):
     """
