@@ -9,7 +9,7 @@ class BinaryTreeNode:
 
     @staticmethod
     def create(val):
-        return BinaryTreeNode(val) if val else None
+        return BinaryTreeNode(val) if val is not None else None
 
 
 def deserialize_binary_tree(vals):
