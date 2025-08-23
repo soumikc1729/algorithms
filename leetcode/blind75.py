@@ -1,3 +1,47 @@
+# https://leetcode.com/problems/insert-interval
+def insert(intervals, new_interval):
+    """
+    >>> insert([[1, 3], [6, 9]], [2, 5])
+    [[1, 5], [6, 9]]
+    >>> insert([[1, 2], [3, 5], [6, 7], [8, 10], [12, 16]], [4, 8])
+    [[1, 2], [3, 10], [12, 16]]
+    >>> insert([], [5, 7])
+    [[5, 7]]
+    >>> insert([[2, 5], [6, 7], [8, 9]], [0, 1])
+    [[0, 1], [2, 5], [6, 7], [8, 9]]
+    """
+
+    def within(interval, point):
+        return point >= interval[0] and point <= interval[1]
+
+    def overlaps(interval1, interval2):
+        return (
+            within(interval1, interval2[0])
+            or within(interval1, interval2[1])
+            or within(interval2, interval1[0])
+            or within(interval2, interval1[1])
+        )
+
+    inserted = False
+    updated = []
+    for interval in intervals:
+        if overlaps(interval, new_interval):
+            new_interval = [
+                min(new_interval[0], interval[0]),
+                max(new_interval[1], interval[1]),
+            ]
+        else:
+            if not inserted and new_interval[1] < interval[0]:
+                updated.append(new_interval)
+                inserted = True
+            updated.append(interval)
+
+    if not inserted:
+        updated.append(new_interval)
+
+    return updated
+
+
 # https://leetcode.com/problems/merge-intervals
 def merge(intervals):
     """
