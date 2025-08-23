@@ -1,3 +1,25 @@
+# https://leetcode.com/problems/maximum-product-subarray
+def max_product(nums):
+    """
+    >>> max_product([2, 3, -2, 4])
+    6
+    >>> max_product([-2, 0, -1])
+    0
+    >>> max_product([-2, 3, -4])
+    24
+    """
+    max_here = min_here = max_overall = nums[0]
+
+    for i in range(1, len(nums)):
+        tmp_min_here = min(min_here * nums[i], max_here * nums[i], nums[i])
+        tmp_max_here = max(min_here * nums[i], max_here * nums[i], nums[i])
+        min_here, max_here = tmp_min_here, tmp_max_here
+
+        max_overall = max(max_overall, max_here)
+
+    return max_overall
+
+
 # https://leetcode.com/problems/valid-palindrome
 def is_palindrome(string):
     """
