@@ -1,3 +1,33 @@
+# https://leetcode.com/problems/subtree-of-another-tree
+def is_subtree(root, sub_root):
+    """
+    >>> from data_structures.binary_tree import deserialize_binary_tree
+    >>> is_subtree(deserialize_binary_tree([3, 4, 5, 1, 2]), deserialize_binary_tree([4, 1, 2]))
+    True
+    >>> is_subtree(deserialize_binary_tree([3, 4, 5, 1, 2, None, None, None, None, 0]), deserialize_binary_tree([4, 1, 2]))
+    False
+    """
+
+    def is_same_tree(first, second):
+        if not first and not second:
+            return True
+
+        if first and second and first.val == second.val:
+            left_subtree_same = is_same_tree(first.left, second.left)
+            right_subtree_same = is_same_tree(first.right, second.right)
+            return left_subtree_same and right_subtree_same
+
+        return False
+
+    if not root:
+        return False
+
+    if is_same_tree(root, sub_root):
+        return True
+
+    return is_subtree(root.left, sub_root) or is_subtree(root.right, sub_root)
+
+
 # https://leetcode.com/problems/climbing-stairs
 def climb_stairs(num_stairs):
     """
