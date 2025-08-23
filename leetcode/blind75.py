@@ -1,3 +1,24 @@
+# https://leetcode.com/problems/climbing-stairs
+def climb_stairs(num_stairs):
+    """
+    >>> climb_stairs(2)
+    2
+    >>> climb_stairs(3)
+    3
+    """
+    if num_stairs <= 2:
+        return num_stairs
+
+    prev_prev = 1
+    prev = 2
+    for _ in range(3, num_stairs + 1):
+        curr = prev_prev + prev
+        prev_prev = prev
+        prev = curr
+
+    return prev
+
+
 # https://leetcode.com/problems/reverse-linked-list
 def reverse_list(head):
     """
