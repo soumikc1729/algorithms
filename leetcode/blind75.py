@@ -1,3 +1,43 @@
+# https://leetcode.com/problems/validate-binary-search-tree
+def is_valid_bst(root):
+    """
+    >>> from data_structures.binary_tree import deserialize_binary_tree
+    >>> is_valid_bst(deserialize_binary_tree([2, 1, 3]))
+    True
+    >>> is_valid_bst(deserialize_binary_tree([5, 1, 4, None, None, 3, 6]))
+    False
+    """
+
+    def max(root):
+        node = root
+        while node and node.right:
+            node = node.right
+        return node.val
+
+    def min(root):
+        node = root
+        while node and node.left:
+            node = node.left
+        return node.val
+
+    if not root:
+        return True
+
+    if not is_valid_bst(root.left):
+        return False
+
+    if root.left and max(root.left) >= root.val:
+        return False
+
+    if not is_valid_bst(root.right):
+        return False
+
+    if root.right and min(root.right) <= root.val:
+        return False
+
+    return True
+
+
 # https://leetcode.com/problems/subtree-of-another-tree
 def is_subtree(root, sub_root):
     """
