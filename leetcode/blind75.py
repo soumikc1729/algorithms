@@ -1,3 +1,20 @@
+# https://leetcode.com/problems/number-of-1-bits
+def hamming_weight(n: int) -> int:
+    """
+    >>> hamming_weight(11)
+    3
+    >>> hamming_weight(128)
+    1
+    >>> hamming_weight(2147483645)
+    30
+    """
+    hw = 0
+    while n > 0:
+        hw += n % 2
+        n //= 2
+    return hw
+
+
 # https://leetcode.com/problems/meeting-rooms
 def can_attend_meetings(intervals):
     """
