@@ -1,3 +1,23 @@
+# https://leetcode.com/problems/reverse-bits
+def reverse_bits(n: int) -> int:
+    """
+    >>> reverse_bits(43261596)
+    964176192
+    >>> reverse_bits(2147483644)
+    1073741822
+    """
+    bits = [0] * 32
+    i = 0
+    while n > 0:
+        bits[i] = n % 2
+        i += 1
+        n //= 2
+    ans = 0
+    for b in bits:
+        ans = 2 * ans + b
+    return ans
+
+
 # https://leetcode.com/problems/number-of-1-bits
 def hamming_weight(n: int) -> int:
     """
