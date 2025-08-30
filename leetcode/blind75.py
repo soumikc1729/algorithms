@@ -1,6 +1,36 @@
 from typing import List
 
 
+# https://leetcode.com/problems/longest-palindromic-substring
+def longest_palindrome(string: str) -> str:
+    """
+    >>> longest_palindrome("babad")
+    'bab'
+    >>> longest_palindrome("cbbd")
+    'bb'
+    """
+    if len(string) == 1:
+        return string
+
+    def longest_palindrome_middle_at(left: int, right: int) -> str:
+        while left >= 0 and right < len(string) and string[left] == string[right]:
+            left -= 1
+            right += 1
+        return string[left + 1 : right - 1 + 1]
+
+    longest_palindromic_substr = ""
+    for i in range(1, len(string)):
+        palindromic_substr = longest_palindrome_middle_at(i - 1, i)
+        if len(palindromic_substr) > len(longest_palindromic_substr):
+            longest_palindromic_substr = palindromic_substr
+
+        palindromic_substr = longest_palindrome_middle_at(i, i)
+        if len(palindromic_substr) > len(longest_palindromic_substr):
+            longest_palindromic_substr = palindromic_substr
+
+    return longest_palindromic_substr
+
+
 # https://leetcode.com/problems/longest-consecutive-sequence
 def longest_consecutive(nums: List[int]) -> int:
     """
