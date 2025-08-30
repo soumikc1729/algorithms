@@ -1,4 +1,45 @@
-from typing import List
+from typing import Iterable, List
+
+
+# https://leetcode.com/problems/container-with-most-water
+def max_area(heights: List[int]) -> int:
+    """
+    >>> max_area([1, 8, 6, 2, 5, 4, 8, 3, 7])
+    49
+    >>> max_area([1, 1])
+    1
+    """
+    from collections import namedtuple
+
+    Height = namedtuple("Height", ["h", "i"])
+
+    def asc_heights(range: Iterable[int]) -> List[Height]:
+        asc_hs = []
+        max_h_yet = 0
+        for i in range:
+            if heights[i] > max_h_yet:
+                max_h_yet = heights[i]
+                asc_hs.append(Height(h=heights[i], i=i))
+        return asc_hs
+
+    asc_hs_left = asc_heights(range(len(heights)))
+    asc_hs_right = asc_heights(reversed(range(len(heights))))
+
+    max_area = left = right = 0
+    while left < len(asc_hs_left) and right < len(asc_hs_right):
+        d = asc_hs_right[right].i - asc_hs_left[left].i
+        if d <= 0:
+            break
+
+        h = min(asc_hs_left[left].h, asc_hs_right[right].h)
+        max_area = max(max_area, h * d)
+
+        if asc_hs_left[left].h < asc_hs_right[right].h:
+            left += 1
+        else:
+            right += 1
+
+    return max_area
 
 
 # https://leetcode.com/problems/merge-two-sorted-lists
