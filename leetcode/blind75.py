@@ -1,6 +1,31 @@
 from typing import List
 
 
+# https://leetcode.com/problems/merge-two-sorted-lists
+def merge_two_lists(list1, list2):
+    """
+    >>> from data_structures.linked_list import deserialize_linked_list, serialize_linked_list
+    >>> serialize_linked_list(merge_two_lists(deserialize_linked_list([1, 2, 4]), deserialize_linked_list([1, 3, 4])))
+    [1, 1, 2, 3, 4, 4]
+    >>> serialize_linked_list(merge_two_lists(deserialize_linked_list([]), deserialize_linked_list([])))
+    []
+    >>> serialize_linked_list(merge_two_lists(deserialize_linked_list([]), deserialize_linked_list([0])))
+    [0]
+    """
+    if not list1:
+        return list2
+
+    if not list2:
+        return list1
+
+    if list1.val < list2.val:
+        list1.next = merge_two_lists(list1.next, list2)
+        return list1
+    else:
+        list2.next = merge_two_lists(list1, list2.next)
+        return list2
+
+
 # https://leetcode.com/problems/longest-palindromic-substring
 def longest_palindrome(string: str) -> str:
     """
