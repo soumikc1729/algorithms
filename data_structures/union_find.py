@@ -35,3 +35,6 @@ class UnionFind:
             self.component_sizes[root2] = 0
 
         self.num_components -= 1
+
+    def max_component_size(self):
+        return max(self.component_sizes.values())

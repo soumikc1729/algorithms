@@ -1,3 +1,34 @@
+from typing import List
+
+
+# https://leetcode.com/problems/longest-consecutive-sequence
+def longest_consecutive(nums: List[int]) -> int:
+    """
+    >>> longest_consecutive([100, 4, 200, 1, 3, 2])
+    4
+    >>> longest_consecutive([0, 3, 7, 2, 5, 8, 4, 6, 0, 1])
+    9
+    >>> longest_consecutive([1, 0, 1, 2])
+    3
+    """
+    from data_structures.union_find import UnionFind
+
+    if len(nums) == 0:
+        return 0
+
+    uf = UnionFind(nums)
+
+    encountered = set()
+    for num in nums:
+        if num - 1 in encountered:
+            uf.union(num - 1, num)
+        if num + 1 in encountered:
+            uf.union(num, num + 1)
+        encountered.add(num)
+
+    return uf.max_component_size()
+
+
 # https://leetcode.com/problems/reverse-bits
 def reverse_bits(n: int) -> int:
     """
