@@ -2,7 +2,7 @@ from typing import List, Iterable
 
 
 # https://leetcode.com/problems/valid-sudoku
-def is_valid_sudoku(board: List[List[int]]) -> bool:
+def is_valid_sudoku(board: List[List[str]]) -> bool:
     """
     >>> is_valid_sudoku([["5", "3", ".", ".", "7", ".", ".", ".", "."]
     ...     , ["6", ".", ".", "1", "9", "5", ".", ".", "."]
