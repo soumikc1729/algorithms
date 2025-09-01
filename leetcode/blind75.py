@@ -1,6 +1,28 @@
 from typing import Iterable, List
 
 
+# https://leetcode.com/problems/longest-substring-without-repeating-characters
+def length_of_longest_substring(string: str) -> int:
+    """
+    >>> length_of_longest_substring("abcabcbb")
+    3
+    >>> length_of_longest_substring("bbbbb")
+    1
+    >>> length_of_longest_substring("pwwkew")
+    3
+    """
+    max_len = 0
+    found = {}
+    left = right = 0
+    for ch in string:
+        if ch in found:
+            left = max(left, found[ch] + 1)
+        found[ch] = right
+        right += 1
+        max_len = max(max_len, right - left)
+    return max_len
+
+
 # https://leetcode.com/problems/container-with-most-water
 def max_area(heights: List[int]) -> int:
     """
