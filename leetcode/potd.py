@@ -1,6 +1,35 @@
 from typing import List, Iterable
 
 
+# https://leetcode.com/problems/maximum-average-pass-ratio
+def max_average_ratio(classes: List[List[int]], extra_students: int) -> float:
+    """
+    >>> abs(max_average_ratio([[1, 2], [3, 5], [2, 2]], 2) - 0.78333) < 10**-5
+    True
+    >>> abs(max_average_ratio([[2, 4], [3, 9], [4, 5], [2, 10]], 4) - 0.53485) < 10**-5
+    True
+    """
+
+    def gain(cls: List[int]) -> float:
+        return (cls[0] + 1) / (cls[1] + 1) - cls[0] / cls[1]
+
+    import heapq
+
+    pq = []
+    pass_ratio_sum = 0
+    for cls in classes:
+        heapq.heappush(pq, (-gain(cls), cls))
+        pass_ratio_sum += cls[0] / cls[1]
+
+    for _ in range(extra_students):
+        (priority, cls) = heapq.heappop(pq)
+        pass_ratio_sum += -priority
+        cls = [cls[0] + 1, cls[1] + 1]
+        heapq.heappush(pq, (-gain(cls), cls))
+
+    return pass_ratio_sum / len(classes)
+
+
 # https://leetcode.com/problems/sudoku-solver
 def solve_sudoku(board: List[List[int]]) -> None:
     """
