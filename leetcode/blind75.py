@@ -1,6 +1,32 @@
 from typing import Iterable, List
 
 
+# https://leetcode.com/problems/counting-bits
+def count_bits(n: int) -> List[int]:
+    """
+    >>> count_bits(2)
+    [0, 1, 1]
+    >>> count_bits(5)
+    [0, 1, 1, 2, 1, 2]
+    """
+    if n == 0:
+        return [0]
+
+    ans = [0] * (n + 1)
+
+    twos_power = 1
+    ans[twos_power] = 1
+
+    for x in range(2, n + 1):
+        if x == 2 * twos_power:
+            ans[x] = 1
+            twos_power *= 2
+        else:
+            ans[x] = ans[twos_power] + ans[x - twos_power]
+
+    return ans
+
+
 # https://leetcode.com/problems/longest-substring-without-repeating-characters
 def length_of_longest_substring(string: str) -> int:
     """
