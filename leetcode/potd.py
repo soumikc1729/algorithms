@@ -1,6 +1,43 @@
 from typing import List, Iterable
 
 
+# https://leetcode.com/problems/find-the-number-of-ways-to-place-people-i
+def number_of_pairs(points: List[List[int]]) -> int:
+    """
+    >>> number_of_pairs([[1,1],[2,2],[3,3]])
+    0
+    >>> number_of_pairs([[6,2],[4,4],[2,6]])
+    2
+    >>> number_of_pairs([[3,1],[1,3],[1,1]])
+    2
+    """
+
+    def upper_left(a, b):
+        return a[0] <= b[0] and a[1] >= b[1]
+
+    def within_rect(p, rect):
+        return upper_left(rect[0], p) and upper_left(p, rect[1])
+
+    points.sort(key=lambda p: [p[0], -p[1]])
+    n = len(points)
+    count = 0
+    for i in range(n):
+        for j in range(i + 1, n):
+            a, b = points[i], points[j]
+            if not upper_left(a, b):
+                continue
+            p_within_rect = False
+            for k in range(i + 1, j):
+                p = points[k]
+                if within_rect(p, rect=[a, b]):
+                    p_within_rect = True
+                    break
+            if not p_within_rect:
+                count += 1
+
+    return count
+
+
 # https://leetcode.com/problems/maximum-average-pass-ratio
 def max_average_ratio(classes: List[List[int]], extra_students: int) -> float:
     """
