@@ -1,4 +1,35 @@
+import math
+
 from typing import List, Iterable
+
+
+# https://leetcode.com/problems/find-the-number-of-ways-to-place-people-ii
+def number_of_pairs(points: List[List[int]]) -> int:
+    """
+    >>> number_of_pairs([[1,1],[2,2],[3,3]])
+    0
+    >>> number_of_pairs([[6,2],[4,4],[2,6]])
+    2
+    >>> number_of_pairs([[3,1],[1,3],[1,1]])
+    2
+    """
+    points.sort(key=lambda p: [p[0], -p[1]])
+
+    ans = 0
+
+    for i in range(len(points) - 1):
+        a = points[i]
+        x_min = a[0] - 1
+        x_max = math.inf
+        y_min = -math.inf
+        y_max = a[1] + 1
+        for j in range(i + 1, len(points)):
+            b = points[j]
+            if x_min < b[0] and b[0] < x_max and y_min < b[1] and b[1] < y_max:
+                ans += 1
+                x_min = b[0]
+                y_min = b[1]
+    return ans
 
 
 # https://leetcode.com/problems/find-the-number-of-ways-to-place-people-i
