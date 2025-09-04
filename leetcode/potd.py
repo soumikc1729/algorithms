@@ -3,6 +3,25 @@ import math
 from typing import List, Iterable
 
 
+# https://leetcode.com/problems/find-closest-person
+def find_closest_person(x: int, y: int, z: int) -> int:
+    """
+    >>> find_closest_person(x=2, y=7, z=4)
+    1
+    >>> find_closest_person(x=2, y=5, z=6)
+    2
+    >>> find_closest_person(x=1, y=5, z=3)
+    0
+    """
+    d1 = abs(x - z)
+    d2 = abs(y - z)
+    if d1 < d2:
+        return 1
+    elif d2 < d1:
+        return 2
+    return 0
+
+
 # https://leetcode.com/problems/find-the-number-of-ways-to-place-people-ii
 def number_of_pairs(points: List[List[int]]) -> int:
     """
