@@ -3,6 +3,39 @@ import math
 from typing import List, Iterable
 
 
+# https://leetcode.com/problems/minimum-operations-to-make-the-integer-zero
+def make_the_integer_zero(num1: int, num2: int) -> int:
+    """
+    >>> make_the_integer_zero(3, -2)
+    3
+    >>> make_the_integer_zero(5, 7)
+    -1
+    >>> make_the_integer_zero(85, 42)
+    -1
+    """
+
+    def count_one_bit(num):
+        count = 0
+        while num > 0:
+            count += num % 2
+            num //= 2
+        return count
+
+    # 2^i1 + num2 + 2^i2 + num2 + ... + 2^ix + num2 = num1
+    # 2^i1 + 2^i2 + ... + 2^ix = num1 - x * num2
+    # => num1 - x * num2 >= 2^0 + 2^0 + ... x times = x
+    # => num1 - x * num2 = S s.t. bin(S) should have <= x 1 bit(s)
+    x = 1
+    while True:
+        sum = num1 - x * num2
+        if sum < x:
+            return -1
+        one_bit_count = count_one_bit(sum)
+        if one_bit_count <= x:
+            return x
+        x += 1
+
+
 # https://leetcode.com/problems/find-closest-person
 def find_closest_person(x: int, y: int, z: int) -> int:
     """
