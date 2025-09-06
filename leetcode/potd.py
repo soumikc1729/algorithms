@@ -3,6 +3,37 @@ import math
 from typing import List, Iterable
 
 
+# https://leetcode.com/problems/minimum-operations-to-make-array-elements-zero
+def min_operations(queries: List[List[int]]) -> int:
+    """
+    >>> min_operations([[1, 2], [2, 4]])
+    3
+    >>> min_operations([[2, 6]])
+    4
+    """
+
+    def total_steps(r: int) -> int:
+        """
+        f(x) = no. of steps reqd to make x to 0
+        For [1, ..., r], total steps reqd = f(1) + ... + f(r) = S
+        We can group the steps into 2 in each op, so total ops reqd = ceiling(S // 2)
+        """
+        total_steps = 0
+        steps = 1
+        limit = 1
+        while limit * 4 <= r:
+            total_steps += steps * 3 * limit  # (4 * limit - limit)
+            steps += 1
+            limit *= 4
+        total_steps += steps * (r + 1 - limit)
+        return total_steps
+
+    total_ops = 0
+    for l, r in queries:
+        total_ops += math.ceil((total_steps(r) - total_steps(l - 1)) / 2)
+    return total_ops
+
+
 # https://leetcode.com/problems/minimum-operations-to-make-the-integer-zero
 def make_the_integer_zero(num1: int, num2: int) -> int:
     """
