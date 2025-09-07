@@ -3,6 +3,28 @@ import math
 from typing import List, Iterable
 
 
+# https://leetcode.com/problems/find-n-unique-integers-sum-up-to-zero
+def sum_zero(n: int) -> int:
+    """
+    >>> sum_zero(5)
+    [-2, -1, 0, 1, 2]
+    >>> sum_zero(3)
+    [-1, 0, 1]
+    >>> sum_zero(1)
+    [0]
+    >>> sum_zero(4)
+    [-2, -1, 1, 2]
+    """
+    even = bool(n % 2 == 0)
+    ans = []
+    limit = n // 2
+    for x in range(-limit, limit + 1):
+        if x == 0 and even:
+            continue
+        ans.append(x)
+    return ans
+
+
 # https://leetcode.com/problems/minimum-operations-to-make-array-elements-zero
 def min_operations(queries: List[List[int]]) -> int:
     """
