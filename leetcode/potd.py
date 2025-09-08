@@ -3,6 +3,33 @@ import math
 from typing import List, Iterable
 
 
+# https://leetcode.com/problems/convert-integer-to-the-sum-of-two-no-zero-integers
+def get_no_zero_integers(n: int) -> List[int]:
+    """
+    >>> get_no_zero_integers(2)
+    [1, 1]
+    >>> get_no_zero_integers(11)
+    [2, 9]
+    >>> get_no_zero_integers(1010)
+    [11, 999]
+    """
+
+    def is_zero_integer(x: int) -> bool:
+        while x > 0:
+            if x % 10 == 0:
+                return True
+            x //= 10
+        return False
+
+    for x in range(1, n // 2 + 1):
+        if is_zero_integer(x):
+            continue
+        if not is_zero_integer(n - x):
+            return [x, n - x]
+
+    raise Exception("solution not found")
+
+
 # https://leetcode.com/problems/find-n-unique-integers-sum-up-to-zero
 def sum_zero(n: int) -> int:
     """
